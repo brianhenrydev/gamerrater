@@ -1,0 +1,60 @@
+#extension of django user 
+Table Player {
+  id int pk
+  user_id int [fk]
+  first_name CharField
+  last_name CharField
+  username CharField
+  email CharField
+  password CharField
+  created_at timestamp
+
+}
+
+#Games must be unique players can't create the same game
+Table Game {
+    id int pk
+    title CharField 
+    description CharField
+    designer CharField
+    release_year DateField
+    num_players int
+    complete_time_estimate TimeField
+    recommended_age int
+    player_id int [fk]
+    average_rating int
+    created_at DateTimeField
+}
+
+# a game can have 1-many categories
+
+Table GameCategories {
+    id int pk
+    game_id int [fk]
+    category_id int [fk] 
+}
+
+
+Table Categories {
+    id int pk
+    label CharField
+}
+
+
+Table Reviews {
+    id int pk
+    game_id int [fk]
+    player_id int [fk]
+    content CharField
+
+}
+
+
+Table image_posts {
+    id int pk
+    player_id int [fk]
+    image_url varchar
+    game_id int [fk]
+    uploaded_at timestamp
+
+}
