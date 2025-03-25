@@ -1,0 +1,44 @@
+[
+  {
+    "model": "gamerraterapi.game",
+    "pk": 1,
+    "fields": {
+      "title": "Catan",
+      "description": "In Catan, players try to be the dominant force on the island of Catan by building settlements, cities, and roads.",
+      "designer": "Klaus Teuber",
+      "release_year": "1995-01-01",
+      "players": [1, 2],
+      "time_to_complete_estimate": 90,
+      "recommended_age": 10,
+      "user": 1
+    }
+  },
+  {
+    "model": "gamerraterapi.game",
+    "pk": 2,
+    "fields": {
+      "title": "Ticket to Ride",
+      "description": "Ticket to Ride is a cross-country train adventure where players collect cards of various types of train cars that enable them to claim railway routes connecting cities.",
+      "designer": "Alan R. Moon",
+      "release_year": "2004-01-01",
+      "players": [1, 2],
+      "time_to_complete_estimate": 60,
+      "recommended_age": 8,
+      "user": 2
+    }
+  },
+  {
+    "model": "gamerraterapi.game",
+    "pk": 3,
+    "fields": {
+      "title": "Pandemic",
+      "description": "In Pandemic, players work as a team to treat infections around the world while gathering resources for cures.",
+      "designer": "Matt Leacock",
+      "release_year": "2008-01-01",
+      "players": [1, 2],
+      "time_to_complete_estimate": 45,
+      "recommended_age": 8,
+      "user": 1
+    }
+  }
+]

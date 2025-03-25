@@ -1,0 +1,29 @@
+[
+  {
+    "model": "gamerraterapi.gamereview",
+    "pk": 1,
+    "fields": {
+      "game": 2,
+      "user": 1,
+      "content": "Ticket to Ride is an excellent family game! Easy to learn but with enough strategy to keep it interesting."
+    }
+  },
+  {
+    "model": "gamerraterapi.gamereview",
+    "pk": 2,
+    "fields": {
+      "game": 1,
+      "user": 2,
+      "content": "Catan is a classic for a reason. Great balance of luck and strategy."
+    }
+  },
+  {
+    "model": "gamerraterapi.gamereview",
+    "pk": 3,
+    "fields": {
+      "game": 3,
+      "user": 2,
+      "content": "Love the cooperative gameplay in Pandemic. It's challenging but rewarding when you win!"
+    }
+  }
+]

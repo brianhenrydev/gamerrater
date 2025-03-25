@@ -1,0 +1,104 @@
+[
+  {
+    "model": "gamerraterapi.category",
+    "pk": 1,
+    "fields": {
+      "label": "Strategy",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 2,
+    "fields": {
+      "label": "Dice",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 3,
+    "fields": {
+      "label": "Card",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 4,
+    "fields": {
+      "label": "Miniature",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 5,
+    "fields": {
+      "label": "Deck building",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 6,
+    "fields": {
+      "label": "Role playing",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 7,
+    "fields": {
+      "label": "Sports",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 8,
+    "fields": {
+      "label": "Adventure",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 9,
+    "fields": {
+      "label": "Cooperative",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 10,
+    "fields": {
+      "label": "Battle",
+      "created_at": "2023-10-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 11,
+    "fields": {
+      "label": "Strategy"
+    }
+  },
+  {
+    "model": "gamerraterapi.category",
+    "pk": 12,
+    "fields": {
+      "label": "Family"
+    }
+  },
+
+  {
+    "model": "gamerraterapi.category",
+    "pk": 13,
+    "fields": {
+      "label": "Card Game"
+    }
+  }
+]

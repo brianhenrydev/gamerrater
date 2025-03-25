@@ -1,60 +1,62 @@
-#extension of django user 
-Table Player {
-  id int pk
-  user_id int [fk]
-  first_name CharField
-  last_name CharField
-  username CharField
-  email CharField
-  password CharField
-  created_at timestamp
-
-}
-
-#Games must be unique players can't create the same game
 Table Game {
-    id int pk
-    title CharField 
-    description CharField
-    designer CharField
-    release_year DateField
-    num_players int
-    complete_time_estimate TimeField
+    id int [pk, increment]
+    title varchar
+    description text
+    designer varchar
+    release_year date
+    players int
+    time_to_complete_estimate int
     recommended_age int
-    player_id int [fk]
-    average_rating int
-    created_at DateTimeField
+    player_id int [ref: > Player.id]
 }
 
-# a game can have 1-many categories
+Table User {
+    id int [pk, increment]
+    first_name varchar
+    last_name varchar
+    email varchar
+    password varchar
+    username varchar
+}
+
+
+Table GamePlayer {
+  id int [pk]
+  player_id int [ref: > Player.id]
+  game_id int [ref: > Game.id]
+  created_at datetime
+}
 
 Table GameCategories {
-    id int pk
-    game_id int [fk]
-    category_id int [fk] 
+    id int [pk, increment]
+    player_id int [ref: > Player.id]
+    game_id int [ref: > Game.id]
+    category int [ref: > Categories.id]
 }
-
 
 Table Categories {
-    id int pk
-    label CharField
+    id int [pk, increment]
+    label varchar
+}
+Table GameRating {
+    id int [pk, increment]
+    player_id int [ref: > Player.id]
+    rating int
+  }
+
+Table GameReview {
+    id int [pk, increment]
+    game_id int [ref: > Game.id]
+    player_id int [ref: > Player.id]
+    content text
+    rating_id int [ref: > GameRating.id]
 }
 
-
-Table Reviews {
-    id int pk
-    game_id int [fk]
-    player_id int [fk]
-    content CharField
-
-}
-
-
-Table image_posts {
-    id int pk
-    player_id int [fk]
+Table GameImage {
+    id int [pk, increment]
+    player_id int [ref: > Player.id]
+    game_id int [ref: > Game.id]
     image_url varchar
-    game_id int [fk]
-    uploaded_at timestamp
-
 }
+
+
