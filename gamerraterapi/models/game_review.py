@@ -6,10 +6,10 @@ from django.contrib.auth.models import User
 
 
 class GameReview(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="game_review")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        unique_together = ["user", "game"]
+        unique_together = ["user", "game", "content"]

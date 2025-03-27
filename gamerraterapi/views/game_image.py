@@ -1,4 +1,3 @@
-from django.contrib import auth
 from django.shortcuts import get_object_or_404
 from gamerraterapi.models import Game, GameImage
 from gamerraterapi.views.game import GameSerializer
@@ -8,7 +7,10 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from django.db.models import Q
+from django.core.files.base import ContentFile
+import uuid
+import base64
+import logging
 
 
 class GameImageSerializer(serializers.ModelSerializer):
@@ -33,12 +35,7 @@ class GameImageSerializer(serializers.ModelSerializer):
 
 
 class GameImageViewSet(viewsets.ModelViewSet):
-    parser_classes = [MultiPartParser, FormParser]
-
     def list(self, request):
-        search_text = self.request.query_params.get("q", None)
-        if search_text:
-            Games.objects.filter(Q(title_contains=search_text))
         game_images = GameImage.objects.all()
         serializer = GameImageSerializer(
             game_images,
@@ -48,20 +45,28 @@ class GameImageViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        image = request.FILES.get("image")
-
+        print("test")
         game_id = request.data.get("game")
-
-        user = User.objects.get(pk=request.user.id)
         game = get_object_or_404(Game, id=game_id)
+        print(f"game: {game}, type(game): {type(game)}")
+        print(f"user: {request.user}, type(request.user): {type(request.user)}")
 
-        if not image:
+        format, imgstr = request.data["image"].split(";base64,")
+        ext = format.split("/")[-1]
+        data = ContentFile(
+            base64.b64decode(imgstr),
+            name=f"{request.data['game']}-{uuid.uuid4()}.{ext}",
+        )
+        print("Error in GameImageViewSet:")
+        print(f"data: {data}, type(data): {type(data)}")
+
+        if not data:
             return Response(
                 {"error": "Image and game are required."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        game = GameImage.objects.create(image=image, user=user, game=game)
+        game = GameImage.objects.create(image=data, user=request.user, game=game)
 
         serialized = GameImageSerializer(game, context={"request": request})
         return Response(serialized.data, status=status.HTTP_201_CREATED)

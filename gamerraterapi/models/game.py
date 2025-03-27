@@ -10,12 +10,12 @@ class Game(models.Model):
     description = models.TextField()
     designer = models.TextField()
     release_year = models.DateField()
-    players = models.ManyToManyField(User, through="GamePlayer", related_name="game")
-    average_rating = models.FloatField()
+    players = models.ManyToManyField(User, through="GamePlayer", related_name="user")
     time_to_complete_estimate = models.IntegerField()
     recommended_age = models.IntegerField()
     created_at = models.DateTimeField(default=timezone.now)
 
     @property
     def average_rating(self):
-        return self.gamerating_set.aggregate(Avg("rating"))["rating__avg"] or 0
+        average = self.ratings.aggregate(Avg("rating"))["rating__avg"]
+        return average if average is not None else 0
