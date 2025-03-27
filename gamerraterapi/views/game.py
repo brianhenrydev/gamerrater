@@ -9,6 +9,10 @@ from rest_framework import serializers
 from django.db.models import Q
 import logging
 
+from django.core.files.base import ContentFile
+import uuid
+import base64
+
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s %(levelname)s: %(message)s",
@@ -47,6 +51,7 @@ class GameSerializer(serializers.ModelSerializer):
             "average_rating",
             "is_owner",
             "description",
+            "image",
             "designer",
             "categories",
             "release_year",
@@ -106,10 +111,21 @@ class GameViewSet(viewsets.ViewSet):
         designer = request.data.get("designer")
         categories = request.data.get("categories", [])
 
+        # Handle optional base64-encoded image
+        image = None
+        if "image" in request.data and request.data["image"]:
+            format, imgstr = request.data["image"].split(";base64,")
+            ext = format.split("/")[-1]
+            image = ContentFile(
+                base64.b64decode(imgstr),
+                name=f"{request.data['title']}-{uuid.uuid4()}.{ext}",
+            )
+
         game = Game.objects.create(
             title=title,
             description=description,
             user=user,
+            image=image,
             designer=designer,
             release_year=release_year,
             time_to_complete_estimate=time_to_complete_estimate,
@@ -146,6 +162,17 @@ class GameViewSet(viewsets.ViewSet):
             "time_to_complete_estimate", game.time_to_complete_estimate
         )
         game.recommended_age = request.data.get("recommended_age", game.recommended_age)
+
+        # Handle optional base64-encoded image
+        if "image" in request.data and request.data["image"]:
+            format, imgstr = request.data["image"].split(";base64,")
+            ext = format.split("/")[-1]
+            game.image = ContentFile(
+                base64.b64decode(imgstr),
+                name=f"{request.data['title']}-{uuid.uuid4()}.{ext}",
+            )
+        else:
+            game.image = None
 
         game.save()
 

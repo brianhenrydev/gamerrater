@@ -8,6 +8,7 @@ class Game(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="game_user")
     title = models.TextField(unique=True)
     description = models.TextField()
+    image = models.ImageField(upload_to="game_images/", null=True, blank=True)
     designer = models.TextField()
     release_year = models.DateField()
     players = models.ManyToManyField(User, through="GamePlayer", related_name="user")
